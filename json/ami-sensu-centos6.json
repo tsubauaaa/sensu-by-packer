@@ -1,0 +1,135 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_region": "",
+    "aws_vpc_id": "",
+    "aws_subnet_id": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `aws_region`}}",
+    "source_ami": "ami-13614b12",
+    "instance_type": "t2.micro",
+    "iam_instance_profile": "admin",
+    "ssh_username": "root",
+    "ssh_timeout": "10m",
+    "tags" : {
+        "Name" : "Sensu_CentOS_Image"
+      },
+    "vpc_id": "{{user `aws_vpc_id`}}",
+    "subnet_id": "{{user `aws_subnet_id`}}",
+    "ami_name": "Sensu_CentOS_Image_{{isotime | clean_ami_name}}"
+  }],
+  "provisioners": [
+     {
+       "type": "chef-solo",
+       "cookbook_paths": ["../cookbooks"],
+       "data_bags_path": "../data_bags",
+       "run_list": [
+         "yum-epel",
+         "yum-centos",
+         "awscli",
+         "adduser",
+         "build-essential",
+         "chef-dk",
+         "chef_handler",
+         "cron",
+         "git",
+         "graphite::default",
+         "graphite::carbon",
+         "graphite::uwsgi",
+         "iptables",
+         "jq",
+         "logrotate::global",
+         "ntp",
+         "python",
+         "sudo",
+         "timezone",
+         "selinux::disabled",
+         "sensu::default",
+         "sensu::rabbitmq",
+         "sensu::redis",
+         "sensu::server_service",
+         "sensu::api_service",
+         "uchiwa::default",
+         "yum-update"
+       ],
+       "json": {
+         "platform": "centos",
+         "platform_family": "rhel",
+         "authorization": {
+           "adduser": {
+             "users": [
+               "tsuba-admin"
+             ]
+           },
+           "sudo": {
+             "users": [
+               "tsuba-admin"
+             ],
+             "passwordless": true,
+             "include_sudoers_d": false
+           }
+         },
+         "sensu": {
+           "version": "0.17.2-1",
+           "use_unstable_repo": false,
+           "log_level": "info",
+           "use_ssl": "true",
+           "use_embedded_ruby": true,
+           "init_style": "sysv",
+           "service_max_wait": 10,
+           "rabbitmq": {
+             "host": "localhost",
+             "port": 5671,
+             "vhost": "/sensu",
+             "user": "sensu",
+             "password": "password"
+           },
+           "redis": {
+             "host": "localhost",
+             "port": 6379
+           },
+           "api": {
+             "host": "localhost",
+             "bind": "0.0.0.0",
+             "port": 4567
+           }
+         },
+         "rabbitmq": {
+           "nodename": "sensu@localhost"
+         },
+         "uchiwa": {
+           "setting": {
+           "user": "admin",
+           "pass": "supersecret",
+           "stats": 10,
+           "refresh": 10000,
+           "host": "0.0.0.0",
+           "port": "3000"
+           }
+         },
+       "prevent_sudo": true,
+       "skip_install": false
+       }
+     },
+     {
+       "type": "file",
+       "source": "../serverspec",
+       "destination": "/tmp"
+     },
+     {
+       "type": "shell",
+       "script": "../scripts/serverspec.sh"
+     },
+     {
+       "type": "shell",
+       "inline": [
+         "rm -f /root/.ssh/authorized_keys"
+       ]
+     }
+  ]
+}
