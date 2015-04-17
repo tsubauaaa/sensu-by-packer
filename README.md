@@ -2,8 +2,8 @@
 sensu + rabbitmq + redis + uchiwa create image by packer
 
 # Requirement
-variable definition
-example:  
+* variable definition  
+prepare this    
 json/variables.json
 <pre>
 {
@@ -12,7 +12,9 @@ json/variables.json
     "aws_subnet_id": "YOUR_SUBNET_ID"
 }
 </pre>
-data_bags/ssl/ssl.json
+* ssl cert & key files  
+prepare this  
+data_bags/sensu/ssl.json
 ssl.json that is created when you run the sensu-chef/examples/ssl/generate_databag.rb  
 of sensu-chef  
 sensu-chef see below:  
