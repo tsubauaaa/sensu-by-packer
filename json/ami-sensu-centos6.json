@@ -50,7 +50,7 @@
          "sensu::redis",
          "sensu::server_service",
          "sensu::api_service",
-         "sensu-config::default",
+         "sensu-conf::default",
          "sensu::client_service",
          "uchiwa::default",
          "yum-update"
