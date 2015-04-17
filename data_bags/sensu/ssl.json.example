@@ -1,0 +1,12 @@
+{
+  "id": "ssl",
+  "server": {
+    "key": "",
+    "cert": "",
+    "cacert": ""
+  },
+  "client": {
+    "key": "",
+    "cert": ""
+  }
+}
