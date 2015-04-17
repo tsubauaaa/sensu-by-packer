@@ -34,7 +34,6 @@
          "awscli",
          "adduser",
          "build-essential",
-         "chef-dk",
          "chef_handler",
          "cron",
          "git",
@@ -51,6 +50,8 @@
          "sensu::redis",
          "sensu::server_service",
          "sensu::api_service",
+         "sensu-config::default",
+         "sensu::client_service",
          "uchiwa::default",
          "yum-update"
        ],
