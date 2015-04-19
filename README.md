@@ -13,8 +13,22 @@ json/variables.json
 }
 </pre>
 * ssl cert & key files  
+data_bags/sensu/ssl.json  
+<pre> 
+{
+  "id": "ssl",
+  "server": {
+    "key": "",
+    "cert": "",
+    "cacert": ""
+  },
+  "client": {
+    "key": "",
+    "cert": ""
+  }
+}
+</pre>
 prepare this  
-data_bags/sensu/ssl.json
 ssl.json that is created when you run the sensu-chef/examples/ssl/generate_databag.rb  
 of sensu-chef  
 sensu-chef see below:  
