@@ -20,28 +20,11 @@ directory '/etc/sensu/conf.d/mutators' do
     action  :create
 end
 
-directory '/etc/sensu/conf.d/checks/' do
-    owner   'root'
-    group   'sensu'
-    mode    '0750'
-    action  :create
-end
-
-directory '/etc/sensu/conf.d/checks/aws/' do
-    owner   'root'
-    group   'sensu'
-    mode    '0750'
-    action  :create
-end
-
-directory '/etc/sensu/conf.d/checks/resource/' do
-    owner   'root'
-    group   'sensu'
-    mode    '0750'
-    action  :create
-end
-
 directory '/etc/sensu/handlers/' do
+    action  :delete
+end
+
+directory '/etc/sensu/plugins/' do
     action  :delete
 end
 
