@@ -116,6 +116,20 @@
      },
      {
        "type": "file",
+       "source": "../sensu-dir/checks",
+       "destination": "/etc/sensu/conf.d"
+     },
+     {
+       "type": "file",
+       "source": "../sensu-dir/plugins",
+       "destination": "/etc/sensu"
+     },
+     {
+       "type": "shell",
+       "script": "../scripts/sensu-dir.sh"
+     },
+     {
+       "type": "file",
        "source": "../serverspec",
        "destination": "/tmp"
      },
