@@ -39,6 +39,7 @@
          "git",
          "iptables",
          "jq",
+         "libxml2-devel",
          "logrotate::global",
          "ntp",
          "python",
