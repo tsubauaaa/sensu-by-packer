@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_ec2-count": {
+      "type": "metric",
+      "command": "ec2-count-metrics.rb -r ap-northeast-1",
+      "subscribers": [
+        "aws"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "ec2カウント情報の監視"
+    }
+  }
+}
+

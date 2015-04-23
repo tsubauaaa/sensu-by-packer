@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_memory-percent": {
+      "type": "metric",
+      "command": "memory-metrics-percent.rb",
+      "subscribers": [
+        "resource"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "memory使用率情報の監視"
+    }
+  }
+}
+

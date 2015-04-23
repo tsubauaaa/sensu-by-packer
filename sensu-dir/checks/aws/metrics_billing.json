@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_billing": {
+      "type": "metric",
+      "command": "billing-metrics.rb",
+      "subscribers": [
+        "aws"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "billing情報の監視"
+    }
+  }
+}
+

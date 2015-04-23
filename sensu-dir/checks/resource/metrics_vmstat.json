@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_vmstat": {
+      "type": "metric",
+      "command": "vmstat-metrics.rb",
+      "subscribers": [
+        "resource"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "vmstat情報の監視"
+    }
+  }
+}
+

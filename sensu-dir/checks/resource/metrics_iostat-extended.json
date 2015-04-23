@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_disk": {
+      "type": "metric",
+      "command": "disk-metrics.rb",
+      "subscribers": [
+        "resource"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "disk情報の監視"
+    }
+  }
+}
+

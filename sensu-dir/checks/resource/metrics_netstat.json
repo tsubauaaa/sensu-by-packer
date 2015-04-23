@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "metrics_netstat": {
+      "type": "metric",
+      "command": "metrics-netstat-tcp.rb",
+      "subscribers": [
+        "resource"
+      ],
+      "handlers": [
+        "graphite"
+      ],
+      "interval": 60,
+      "custom_summary": "netstat情報の監視"
+    }
+  }
+}
+
